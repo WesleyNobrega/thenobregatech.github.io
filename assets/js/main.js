@@ -1,11 +1,45 @@
-/**
-* Template Name: MyResume
-* Updated: Nov 17 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
+var infoDosIcones = {
+  'iconSupport': {
+    'title': 'Suporte Técnico',
+    'content': 'Nossa abordagem inovadora de suporte técnico visa proporcionar a empresas emergentes a assistência ágil e especializada que necessitam. Com uma equipe experiente, garantimos soluções rápidas para manter suas operações funcionando sem contratempos, oferecendo a tranquilidade que sua empresa merece no mundo da tecnologia.'
+  },
+  'iconNetwork': {
+    'title': 'Redes de Computadores',
+    'content': 'Para empresas que estão começando a explorar o universo da conectividade, oferecemos soluções especializadas em gerenciamento de redes. Com nossa vasta experiência, implementamos e monitoramos redes estáveis e seguras, proporcionando uma base sólida para o crescimento e desenvolvimento contínuo do seu negócio.'
+  },
+  'iconDevelop': {
+    'title': 'Desenvolvimento de Software',
+    'content': 'Como uma empresa recém-chegada, mas com experiência sólida, focamos em desenvolver softwares personalizados para atender às necessidades específicas do seu negócio. Nossa equipe dedicada oferece soluções inovadoras, garantindo que sua empresa esteja equipada com as ferramentas certas para prosperar no mercado digital em constante evolução.'
+  },
+  'iconTraining': {
+    'title': 'Treinamento em TI',
+    'content': 'Acreditamos no poder da capacitação para impulsionar o sucesso de novas empresas. Oferecemos treinamentos em TI, proporcionando conhecimento atualizado e habilidades essenciais para sua equipe. Com uma abordagem prática, preparamos sua empresa para enfrentar os desafios tecnológicos com confiança e eficácia.'
+  },
+  'iconDataAnal': {
+    'title': 'Análise de Dados',
+    'content': 'Em nossos primeiros passos no mercado, trazemos a experiência necessária para extrair insights valiosos de seus dados. A análise de dados é uma ferramenta poderosa para empresas emergentes, e nossa equipe está pronta para orientá-lo na interpretação dessas informações, fornecendo uma base sólida para decisões estratégicas.'
+  },
+  'iconConsulting': {
+    'title': 'Consultoria em TI',
+    'content': 'Como uma empresa que já trilhou um caminho sólido, oferecemos consultoria estratégica em tecnologia para guiar sua empresa nas decisões cruciais. Compreendemos os desafios enfrentados por empresas iniciantes e estamos aqui para fornecer insights valiosos, ajudando você a navegar no cenário tecnológico com confiança e eficácia.'
+  }
+};
+function openModal(icon) {
+  document.getElementById('fade').classList.remove('hide');
+  document.getElementById('modal').classList.remove('hide');
+
+  // Atualiza o título e o conteúdo do modal com os parâmetros fornecidos
+  var iconInfo = infoDosIcones[icon];
+  document.getElementById('modal-title').innerText = iconInfo.title;
+  document.getElementById('modal-content').innerHTML = iconInfo.content;
+}
+
+function closeModal() {
+  document.getElementById('fade').classList.add('hide');
+  document.getElementById('modal').classList.add('hide');
+}
+
+(function () {
   "use strict";
 
   /**
@@ -91,7 +125,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('body').classList.toggle('mobile-nav-active')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -100,7 +134,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -160,7 +194,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -181,9 +215,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -191,7 +225,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -266,5 +300,7 @@
    * Initiate Pure Counter 
    */
   new PureCounter();
+
+
 
 })()
