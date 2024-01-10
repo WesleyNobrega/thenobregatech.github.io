@@ -20,7 +20,6 @@ jobs:
         host: ${{ secrets.HOST }}
         user: ${{ secrets.USER }}
         password: ${{ secrets.PASS }}
-        server_dir: "/public_html"
         localDir: "."   
 
             
