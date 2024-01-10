@@ -1,3 +1,9 @@
+window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-85YGPV16VN');
+
 var infoDosIcones = {
   'iconSupport': {
     'title': 'Suporte Técnico',
