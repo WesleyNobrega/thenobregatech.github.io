@@ -26,15 +26,13 @@ jobs:
             echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
           fi
            
-      - name: Copy changed files
+      - name: Check changed files
+        id: files
         run: |
-          mkdir -p changed_files
-          IFS=$'\n'
-          for file in $(git diff --name-only HEAD HEAD~1); do
-            mkdir -p "changed_files/$(dirname $file)"
-            cp "$file" "changed_files/$file"
-          done
-    
+          if [ $(git rev-list --count HEAD) -gt 1 ]
+          then
+            echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
+          fi
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
