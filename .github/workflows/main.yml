@@ -18,7 +18,7 @@ jobs:
     
       - name: Get changed files
         run: |
-          git diff --name-only HEAD^ HEAD
+          git diff --name-only HEAD HEAD~1
           changed_files=$(echo "${GITHUB_FILES}" | tr '\n' ' ')
     
       - name: Copy changed files
