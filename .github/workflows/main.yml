@@ -5,11 +5,13 @@ on:
     branches: [master]
   pull_request: 
     branches: [master]
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Check out code
+      - name: Checkout repository
         uses: actions/checkout@v3
     
       - name: Fetch remote changes
@@ -20,15 +22,15 @@ jobs:
         id: files
         run: |
           if [ $(git rev-list --count HEAD) -gt 1 ]
-            then
-              echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
+          then
+            echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
           fi
-      - name: Copy changed files
+           
+      - name: Copy all files
         run: |
-          if [ -n "${{ steps.files.outputs.changed_files }}" ]; then
-            mkdir -p changed_files
-            echo "${{ steps.files.outputs.changed_files }}" | xargs -I {} rsync -R {} changed_files/
-          fi
+          mkdir -p changed_files
+          rsync -a . changed_files/
+    
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
