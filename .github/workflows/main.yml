@@ -26,8 +26,8 @@ jobs:
       - name: Copy changed files
         run: |
           if [ -n "${{ steps.files.outputs.changed_files }}" ]; then
-            mkdir changed_files
-            echo "${{ steps.files.outputs.changed_files }}" | xargs -I {} cp --parents {} changed_files/
+            mkdir -p changed_files
+            echo "${{ steps.files.outputs.changed_files }}" | xargs -I {} rsync -R {} changed_files/
           fi
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
