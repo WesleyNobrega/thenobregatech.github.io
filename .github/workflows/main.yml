@@ -16,8 +16,8 @@ jobs:
         run: |
           git fetch
     
-      - name: Get changed files
-          run: |
+      - name: Check changed files
+        run: |
             if [ $(git rev-list --count HEAD) -gt 1 ]
             then
               git diff --name-only HEAD HEAD~1
