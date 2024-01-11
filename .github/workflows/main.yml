@@ -24,7 +24,7 @@ jobs:
             fi
         
       - name: Copy changed files
-        run:
+        run: |
           if [ -n "${changed_files}" ]; then
             mkdir changed_files
             echo "${changed_files}" | xargs -I {} cp --parents {} changed_files/
