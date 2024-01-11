@@ -26,10 +26,14 @@ jobs:
             echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
           fi
            
-      - name: Copy all files
+      - name: Copy changed files
         run: |
           mkdir -p changed_files
-          rsync -a . changed_files/
+          IFS=$'\n'
+          for file in $(git diff --name-only HEAD HEAD~1); do
+            mkdir -p "changed_files/$(dirname $file)"
+            cp "$file" "changed_files/$file"
+          done
     
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
