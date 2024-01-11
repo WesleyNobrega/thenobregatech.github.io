@@ -22,7 +22,7 @@
     gtag('js',new Date());gtag('config','G-85YGPV16VN');
   </script>
 
-  <!-- Vendor CSS Files -->
+ <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -40,13 +40,11 @@
   <span id="ss_img_wrapper_115-55_image_en">
   <a href="http://www.alphassl.com/ssl-certificates/wildcard-ssl.html" 
   target="_blank" title="SSL Certificates">
-  <img alt="Wildcard SSL Certificates" border=0 id="ss_img"
-  src="//seal.alphassl.com/SiteSeal/images/alpha_noscript_115-55_en.gif"
+  <img alt="Wildcard SSL Certificates" border=0 id="ss_img" src="http://seal.alphassl.com/SiteSeal/images/alpha_noscript_115-55_en.gif"
   title="SSL Certificate">
   </a>
   </span>
-  <script type="text/javascript"
-  src="//seal.alphassl.com/SiteSeal/alpha_image_115-55_en.js"></script>
+  <!-- <script type="text/javascript" src="//seal.alphassl.com/SiteSeal/alpha_image_115-55_en.js"></script> -->
   <!--- Secure Site Seal - DO NOT EDIT --->
 
   <!-- ======= Mobile nav toggle button ======= -->
@@ -569,30 +567,23 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Seu nome" required>
+            <div class="container-mail">
+              <form onsubmit="emailSend(); reset(); return false;">
+                <div class="row">
+                  <div class="col-md-6 group">
+                    <input type="text" class="form-control" id="name" placeholder="Nome" name="name" required>
+                  </div>
+                  <div class="col-md-6 group mt-3 mt-md-0">
+                    <input type="email" class="form-control" id="email" placeholder="Seu e-mail" name="email" required>
+                  </div>
                 </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Seu e-mail" required>
+                <div class=group mt-3">
+                  <input type="text" class="form-control" class="form-control" id="subject" placeholder="Assunto" name="subject" required>
                 </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Assunto" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Mensagem" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Enviar Mensagem</button></div>
-            </form>
-
+                <textarea class="form-control" id= "message" name="message" rows="5" placeholder="Mensagem" required></textarea>
+                <button type="submit" class="btn">Enviar Mensagem</button>
+              </form>
+            </div> 
           </div>
 
         </div>
@@ -635,7 +626,9 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.umd.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/emails/smtp.js"></script>
+  <script src="assets/vendor/emails/validate.js"></script>
+  <script src="assets/vendor/sweetalerts/sweetalert.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

@@ -1,8 +1,5 @@
-window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-85YGPV16VN');
+    // Seu código JavaScript no mesmo arquivo HTML ou em um arquivo separado
 
 var infoDosIcones = {
   'iconSupport': {
@@ -44,6 +41,36 @@ function closeModal() {
   document.getElementById('fade').classList.add('hide');
   document.getElementById('modal').classList.add('hide');
 }
+
+function emailSend() {
+  event.preventDefault();
+
+  var userName = document.getElementById('name').value;
+  var email = document.getElementById('email').value;
+  console.log("Email:", email);
+  var subject = document.getElementById('subject').value;
+  var messageBody = document.getElementById('message').value;
+
+  Email.send({
+    SecureToken: "e71cc01e-4ed7-4b0a-9844-6e1436399e20",
+    To: 'thenobrega@thenobrega.tech',
+    From: 'thenobrega@thenobrega.tech',
+    Subject: 'De:' + userName + ' E-mail: ' + email + ' Assunto: '+subject,
+    Body: messageBody
+  }).then(function (message) {
+    console.log("Email.send response:", message);
+    if (message === 'OK') {
+      swal("Mensagem enviada com sucesso", "THE Nóbrega Tech agradece.", "success");
+    } else {
+      swal("Erro no envio, revise os dados", "THE Nóbrega Tech agradece.", "error");
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var enviarButton = document.querySelector('.text-center button');
+  enviarButton.addEventListener('click', emailSend);
+});
 
 (function () {
   "use strict";
