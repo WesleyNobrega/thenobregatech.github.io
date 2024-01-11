@@ -17,17 +17,17 @@ jobs:
           git fetch
     
       - name: Check changed files
+        id: files
         run: |
-            if [ $(git rev-list --count HEAD) -gt 1 ]
+          if [ $(git rev-list --count HEAD) -gt 1 ]
             then
-              changed_files=$(git diff --name-only HEAD HEAD~1)
-            fi
-        
+              echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
+          fi
       - name: Copy changed files
         run: |
-          if [ -n "${changed_files}" ]; then
+          if [ -n "${{ steps.files.outputs.changed_files }}" ]; then
             mkdir changed_files
-            echo "${changed_files}" | xargs -I {} cp --parents {} changed_files/
+            echo "${{ steps.files.outputs.changed_files }}" | xargs -I {} cp --parents {} changed_files/
           fi
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
