@@ -1,38 +1,16 @@
-name: Deploy via Github->Locaweb via ftp
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+name: Deploy via ftp
+on: push
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-    
-      - name: Fetch remote changes
-        run: |
-          git fetch
-    
-      - name: Get changed files
-        run: |
-          git diff --name-only HEAD^ HEAD
-          changed_files=$(echo "${GITHUB_FILES}" | tr '\n' ' ')
-    
-      - name: Copy changed files
-        run: |
-          mkdir changed_files
-          cp $(echo "${changed_files}") changed_files
-    
-      - name: Deploy changed files
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: ftp://${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
-          local-dir: changed_files
+    - uses: actions/checkout@v3
+
+    - name: FTP Deploy Locaweb
+      uses: locaweb/ftp-deploy@1.0.0
+      with:
+        host: ${{ secrets.HOST }} 
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASS }}
+        localDir: "."
