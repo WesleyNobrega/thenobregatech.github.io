@@ -27,7 +27,7 @@ jobs:
       - name: Copy changed files
         run: |
           mkdir changed_files
-          cp $(echo "${changed_files}") changed_files
+          cp $(echo "${changed_files}") changed_files/
     
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
