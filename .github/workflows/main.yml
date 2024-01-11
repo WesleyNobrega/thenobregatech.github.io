@@ -34,7 +34,7 @@ jobs:
       - name: Deploy changed files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ftp://${{ secrets.HOST }}
+          server: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
           local-dir: changed_files/
