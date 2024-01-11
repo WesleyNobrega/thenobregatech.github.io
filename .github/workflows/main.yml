@@ -18,12 +18,11 @@ jobs:
         run: |
           git fetch
     
-      - name: Check changed files
-        id: files
+      - name: Copy changed files
         run: |
-          if [ $(git rev-list --count HEAD) -gt 1 ]
-          then
-            echo "::set-output name=changed_files::$(git diff --name-only HEAD HEAD~1)"
+          mkdir -p changed_files
+          if [ -n "${{ steps.files.outputs.changed_files }}" ]; then
+            echo "${{ steps.files.outputs.changed_files }}" | xargs -I {} sh -c 'mkdir -p changed_files/$(dirname {}) && cp {} changed_files/{}'
           fi
            
       - name: Deploy changed files
