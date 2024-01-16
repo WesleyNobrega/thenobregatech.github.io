@@ -1,5 +1,15 @@
-
-    // Seu código JavaScript no mesmo arquivo HTML ou em um arquivo separado
+if (!localStorage.getItem("cookiesAccepted")) { 
+  var cookieMessage = document.getElementById('cookie-notification');  
+  var closeCookie = document.getElementById('cookie-notification-close');
+  
+  cookieMessage.style.display = 'block';  
+  closeCookie.addEventListener("click", function(e) {  
+    e.preventDefault();
+    localStorage.setItem("cookiesAccepted", true);
+    
+    cookieMessage.style.display = 'none';
+  });
+}
 
 var infoDosIcones = {
   'iconSupport': {
@@ -24,6 +34,10 @@ var infoDosIcones = {
   },
   'iconConsulting': {
     'title': 'Consultoria em TI',
+    'content': 'Como uma empresa que já trilhou um caminho sólido, oferecemos consultoria estratégica em tecnologia para guiar sua empresa nas decisões cruciais. Compreendemos os desafios enfrentados por empresas iniciantes e estamos aqui para fornecer insights valiosos, ajudando você a navegar no cenário tecnológico com confiança e eficácia.'
+  },
+  'iPrivacy': {
+    'title': 'Política de Privacidade',
     'content': 'Como uma empresa que já trilhou um caminho sólido, oferecemos consultoria estratégica em tecnologia para guiar sua empresa nas decisões cruciais. Compreendemos os desafios enfrentados por empresas iniciantes e estamos aqui para fornecer insights valiosos, ajudando você a navegar no cenário tecnológico com confiança e eficácia.'
   }
 };
@@ -55,7 +69,7 @@ function emailSend() {
     SecureToken: "e71cc01e-4ed7-4b0a-9844-6e1436399e20",
     To: 'thenobrega@thenobrega.tech',
     From: 'thenobrega@thenobrega.tech',
-    Subject: 'De:' + userName + ' E-mail: ' + email + ' Assunto: '+subject,
+    Subject: 'De:' + userName + ' E-mail: ' + email + ' Assunto: ' + subject,
     Body: messageBody
   }).then(function (message) {
     console.log("Email.send response:", message);
